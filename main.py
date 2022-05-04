@@ -1,11 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from nn_classification import reduce_dimension, train_nn, train_nn_with_regularization, train_nn_with_different_seeds, \
-    perform_grid_search
+
+from nn_classification import reduce_dimension, train_nn, train_nn_with_regularization, train_nn_with_different_seeds
 from nn_regression import solve_regression_task
 
-def task_1_and_2():
 
+def task_1_and_2():
+# I HAVE GITHUB
     # Load the 'data/features.npy' and 'data/targets.npy' using np.load.
     features = np.zeros((2062, 64, 64)) # TODO: Change me
     targets = np.zeros((2062,))  # TODO: Change me
