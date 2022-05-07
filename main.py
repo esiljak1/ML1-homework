@@ -5,10 +5,9 @@ from nn_regression import solve_regression_task
 
 
 def task_1_and_2():
-# I HAVE GITHUB
     # Load the 'data/features.npy' and 'data/targets.npy' using np.load.
-    features = np.zeros((2062, 64, 64)) # TODO: Change me
-    targets = np.zeros((2062,))  # TODO: Change me
+    features = np.load("./data/features.npy")
+    targets = np.load("./data/targets.npy")
     print(f'Shapes: {features.shape}, {targets.shape}')
 
     # Show one sample for each digit
@@ -30,7 +29,7 @@ def task_1_and_2():
     # PCA
     # Task 1.1.
     print("----- Task 1.1 -----")
-    n_components = 1 # TODO
+    n_components = 114  # TODO
     X_reduced = reduce_dimension(features, n_components)
     print(X_reduced.shape)
 
@@ -62,7 +61,7 @@ def task_3(): # Regression with NNs
 
 def main():
     task_1_and_2()
-    task_3()
+    # task_3()
 
 
 if __name__ == '__main__':

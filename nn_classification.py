@@ -15,13 +15,14 @@ def reduce_dimension(features, n_components):
     :return: Data with reduced dimensionality. Shape: (n_samples, n_components)
     """
 
-    # pca = # TODO # Create an instance of PCA from sklearn.decomposition (already imported). 
+    pca = PCA(n_components)  # TODO # Create an instance of PCA from sklearn.decomposition (already imported).
 
-    X_reduced = np.zeros((features.shape[0], n_components)) # TODO # Fit the model with features, and apply the transformation on the features.
+    X_reduced = pca.fit_transform(features)  # TODO # Fit the model with features, and apply the transformation on the features.
 
-    explained_var = 0 # TODO: # Calculate the percentage of variance explained
+    explained_var = sum(pca.explained_variance_ratio_)  # TODO: # Calculate the percentage of variance explained
     print(f'Explained variance: {explained_var}')
     return X_reduced
+
 
 def train_nn(features, targets):
     """
@@ -42,6 +43,7 @@ def train_nn(features, targets):
     loss = 0 # TODO
     print(f'Train accuracy: {train_acc:.4f}. Test accuracy: {test_acc:.4f}')
     print(f'Loss: {loss:.4f}')
+
 
 def train_nn_with_regularization(features, targets):
     """
