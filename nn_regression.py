@@ -10,7 +10,7 @@ def calculate_mse(targets, predictions):
     :param predictions: Predictions obtained by using the model
     :return:
     """
-    mse = 0 # TODO Calculate MSE using mean_squared_error from sklearn.metrics (alrady imported)
+    mse = mean_squared_error(targets, predictions)  # TODO Calculate MSE using mean_squared_error from sklearn.metrics (alrady imported)
     return mse
 
 

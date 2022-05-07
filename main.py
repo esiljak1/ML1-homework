@@ -53,8 +53,8 @@ def task_1_and_2():
 def task_3(): # Regression with NNs
 
     # Load 'data/x_datapoints.npy' and 'data/y_datapoints.npy' using np.load.
-    x_dataset = np.zeros((1000, 2)) # TODO
-    y_targets = np.zeros((1000,)) # TODO
+    x_dataset = np.load("./data/x_datapoints.npy")  # TODO
+    y_targets = np.load("./data/y_datapoints.npy")  # TODO
     print(f'Shapes: {x_dataset.shape}, {y_targets.shape}')
 
     solve_regression_task(x_dataset, y_targets)
