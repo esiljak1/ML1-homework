@@ -59,13 +59,19 @@ def train_nn_with_regularization(features, targets):
     """
     X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.2, random_state=33)
 
-    # Copy your code from train_nn, but experiment now with regularization (alpha, early_stopping).
+    n_hidden_neurons = [5, 100, 200]  # TODO create a list
 
-    train_acc = 0 # TODO
-    test_acc =  0 # TODO
-    loss =  0 # TODO
-    print(f'Train accuracy: {train_acc:.4f}. Test accuracy: {test_acc:.4f}')
-    print(f'Loss: {loss:.4f}')
+    for n_hid in n_hidden_neurons:
+        # TODO create an instance of MLPClassifier from sklearn.neural_network (already imported).
+        # Set parameters (some of them are specified in the HW2 sheet).
+        clf = MLPClassifier(random_state=0, max_iter=500, hidden_layer_sizes=n_hid, alpha=1).fit(X_train, y_train)
+
+        train_acc = clf.score(X_train, y_train)  # TODO
+        test_acc = clf.score(X_test, y_test)  # TODO
+        loss = clf.loss_  # TODO
+        print(f'Data for n_hid={n_hid}')
+        print(f'Train accuracy: {train_acc:.4f}. Test accuracy: {test_acc:.4f}')
+        print(f'Loss: {loss:.4f}\n')
 
 
 def train_nn_with_different_seeds(features, targets):
