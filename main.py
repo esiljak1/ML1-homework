@@ -34,7 +34,7 @@ def task_1_and_2():
     print(X_reduced.shape)
 
     # Task 1.2
-    print("----- Task 1.1 -----")
+    print("----- Task 1.2 -----")
     train_nn(X_reduced, targets)
 
     # Task 1.3
