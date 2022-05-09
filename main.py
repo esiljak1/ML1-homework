@@ -61,8 +61,8 @@ def task_3(): # Regression with NNs
     solve_regression_task(x_dataset, y_targets)
 
 def main():
-    task_1_and_2()
-    # task_3()
+    # task_1_and_2()
+    task_3()
 
 
 if __name__ == '__main__':
