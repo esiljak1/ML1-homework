@@ -63,7 +63,7 @@ def task_3(): # Regression with NNs
 
 
 def main():
-    # task_1_and_2()
+    task_1_and_2()
     task_3()
 
 
