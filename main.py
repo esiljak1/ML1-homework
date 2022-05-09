@@ -1,6 +1,7 @@
 import numpy as np
 
-from nn_classification import reduce_dimension, train_nn, train_nn_with_regularization, train_nn_with_different_seeds
+from nn_classification import reduce_dimension, train_nn, train_nn_with_regularization, train_nn_with_different_seeds, \
+    perform_grid_search
 from nn_regression import solve_regression_task
 
 
@@ -47,8 +48,8 @@ def task_1_and_2():
     train_nn_with_different_seeds(X_reduced, targets)
 
     # Task 2 - Bonus task. Uncomment the function call if you decide to do this task.
-    # print("----- Task 2 -----")
-    # perform_grid_search(X_reduced, targets)
+    print("----- Task 2 -----")
+    perform_grid_search(X_reduced, targets)
 
 
 def task_3(): # Regression with NNs
@@ -59,6 +60,7 @@ def task_3(): # Regression with NNs
     print(f'Shapes: {x_dataset.shape}, {y_targets.shape}')
 
     solve_regression_task(x_dataset, y_targets)
+
 
 def main():
     task_1_and_2()

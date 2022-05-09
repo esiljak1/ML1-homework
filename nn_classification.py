@@ -2,6 +2,7 @@ import warnings
 
 import matplotlib.pyplot as plt
 import numpy as np
+import sklearn.model_selection
 from sklearn.decomposition import PCA
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
@@ -153,12 +154,20 @@ def perform_grid_search(features, targets):
     :return:
     """
     X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.2, random_state=33)
-    parameters = None # TODO create a dictionary of params
+    parameters = {
+        'alpha': [0.0, 0.001, 1.0],
+        'activation': ['identity', 'logistic', 'relu'],
+        'solver': ['lbfgs', 'adam'],
+        'hidden_layer_sizes': [(100,), (200,)]
+    } # TODO create a dictionary of params
 
-    # nn = # TODO create an instance of MLPClassifier. Do not forget to set parameters as specified in the HW2 sheet.
-    # grid_search = # TODO create an instance of GridSearchCV from sklearn.model_selection (already imported) with
+    nn = MLPClassifier(max_iter=500, random_state=0, early_stopping=True)  # TODO create an instance of MLPClassifier. Do not forget to set parameters as specified in the HW2 sheet.
+    grid_search = sklearn.model_selection.GridSearchCV(nn, parameters, n_jobs=-1)  # TODO create an instance of GridSearchCV from sklearn.model_selection (already imported) with
     # appropriate params. Set: n_jobs=-1, this is another parameter of GridSearchCV, in order to get faster execution of the code.
 
     # TODO call fit on the train data
+    grid_search.fit(X_train, y_train)
     # TODO print the best score
+    print(f'Best score: {grid_search.best_score_}')
     # TODO print the best parameters found by grid_search
+    print(f'Parameters for the best score: {grid_search.best_params_}')
