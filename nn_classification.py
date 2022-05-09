@@ -1,10 +1,11 @@
+import warnings
+
+import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix, classification_report
-from sklearn.model_selection import GridSearchCV
-import warnings
+
 warnings.filterwarnings("ignore")
 
 
@@ -64,7 +65,7 @@ def train_nn_with_regularization(features, targets):
     for n_hid in n_hidden_neurons:
         # TODO create an instance of MLPClassifier from sklearn.neural_network (already imported).
         # Set parameters (some of them are specified in the HW2 sheet).
-        clf = MLPClassifier(random_state=0, max_iter=500, hidden_layer_sizes=n_hid, alpha=1).fit(X_train, y_train)
+        clf = MLPClassifier(random_state=0, max_iter=500, hidden_layer_sizes=n_hid, alpha = 1).fit(X_train, y_train)
 
         train_acc = clf.score(X_train, y_train)  # TODO
         test_acc = clf.score(X_test, y_test)  # TODO
@@ -85,27 +86,47 @@ def train_nn_with_different_seeds(features, targets):
     :return:
     """
     X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.2, random_state=33)
-    seeds = [0] # TODO create a list of different seeds of your choice
+    seeds = [0, 2, 27, 55, 100] # TODO create a list of different seeds of your choice
 
     train_acc_arr = np.zeros(len(seeds))
     test_acc_arr = np.zeros(len(seeds))
 
     # TODO create an instance of MLPClassifier, check the perfomance for different seeds
+    # We choose n_hid = 200
 
-    train_acc = 0 # TODO 
-    test_acc =  0 # TODO for each seed
-    loss =  0 # TODO for each seed
-    print(f'Train accuracy: {train_acc:.4f}. Test accuracy: {test_acc:.4f}')
-    print(f'Loss: {loss:.4f}')
+    i = 0
 
+    for seed in seeds:
+        clf = MLPClassifier(random_state=seed, max_iter=500, hidden_layer_sizes=200, alpha = 1).fit(X_train, y_train)
+        train_acc = clf.score(X_train, y_train)  # TODO
+        test_acc = clf.score(X_test, y_test)  # TODO for each seed
+        loss = clf.loss_  # TODO for each seed
+        print(f'Data for random_state={seed}')
+        print(f'Train accuracy: {train_acc:.4f}. Test accuracy: {test_acc:.4f}')
+        print(f'Loss: {loss:.4f}\n')
 
-    train_acc_mean = 0 # TODO
-    train_acc_std = 0 # TODO
-    test_acc_mean = 0 # TODO
-    test_acc_std = 0 # TODO
+        if seed == 27: # TASK 1.5. Plot loss curve for seed = 27
+            x_line = range(0,len(clf.loss_curve_))
+            y_line = clf.loss_curve_
+            plt.plot(x_line, y_line)
+            plt.ylabel ("Loss")
+            plt.xlabel("Iterations")
+            plt.title("Loss over iteration. Seed = 27. ")
+            plt.show()
+            print (len(clf.loss_curve_))
+
+        train_acc_arr[i] = train_acc
+        test_acc_arr[i] = test_acc
+        i = i+1
+
+    train_acc_mean = np.average(train_acc_arr) # TODO
+    train_acc_std = np.std(test_acc_arr) # TODO
+    test_acc_mean = np.average(test_acc_arr) # TODO
+    test_acc_std = np.std(test_acc_arr) # TODO
     print(f'On the train set: {train_acc_mean:.4f} +/- {train_acc_std:.4f}')
     print(f'On the test set: {test_acc_mean:.4f} +/- {test_acc_std:.4f}')
     # TODO: print min and max accuracy as well
+
 
 
     # TODO: Confusion matrix and classification report (for one classifier that performs well)

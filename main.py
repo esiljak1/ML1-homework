@@ -13,15 +13,16 @@ def task_1_and_2():
     # Show one sample for each digit
     # Uncomment if you want to see the images as given in Fig. 1 in the HW2 sheet
     # But it plots 10 separate figures
-
-    # image_index_list = [260, 900, 1800, 1600, 1400, 2061, 700, 500, 1111, 100]
-    # for id_img in range(10):
-    #     plt.figure(figsize=(8, 5))
-    #     plt.imshow(features[image_index_list[id_img]])
-    #     plt.axis('off')
-    #     title = "Sign " + str(id_img)
-    #     plt.title(title)
-    # plt.show()
+    """
+    image_index_list = [260, 900, 1800, 1600, 1400, 2061, 700, 500, 1111, 100]
+    for id_img in range(10):
+         plt.figure(figsize=(8, 5))
+         plt.imshow(features[image_index_list[id_img]])
+         plt.axis('off')
+         title = "Sign " + str(id_img)
+         plt.title(title)
+    plt.show()
+    """
 
     features = features.reshape((features.shape[0], -1))
     print(features.shape)
