@@ -32,13 +32,13 @@ def solve_regression_task(features, targets):
                     "learning_rate" : ["constant", "invscaling", "adaptive"],   # optimizer
                     "max_iter" : [100, 200, 500]
                      }
-    clf = GridSearchCV(MLPRegressor(), parameters).fit(X_train, y_train)
-    print (clf.best_params_)
+    clf = GridSearchCV( MLPRegressor(), parameters ).fit(X_train, y_train)
+    print ("The best parameters are: ", clf.best_params_)
 
-
-    """"
     # Calculate predictions
-    y_pred_train = 0 # TODO
-    y_pred_test = 0 # TODO
+    y_pred_train = clf.predict(X_train) # TODO
+    y_pred_test = clf.predict(X_test) # TODO
     print(f'Train MSE: {calculate_mse(y_train, y_pred_train):.4f}. Test MSE: {calculate_mse(y_test, y_pred_test):.4f}')
-    """
+
+    loss = clf.loss_
+    print("The loss achived with our model is", loss)
