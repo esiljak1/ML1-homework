@@ -3,6 +3,7 @@ import warnings
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 
@@ -105,16 +106,6 @@ def train_nn_with_different_seeds(features, targets):
         print(f'Train accuracy: {train_acc:.4f}. Test accuracy: {test_acc:.4f}')
         print(f'Loss: {loss:.4f}\n')
 
-        if seed == 27: # TASK 1.5. Plot loss curve for seed = 27
-            x_line = range(0,len(clf.loss_curve_))
-            y_line = clf.loss_curve_
-            plt.plot(x_line, y_line)
-            plt.ylabel ("Loss")
-            plt.xlabel("Iterations")
-            plt.title("Loss over iteration. Seed = 27. ")
-            plt.show()
-            print (len(clf.loss_curve_))
-
         train_acc_arr[i] = train_acc
         test_acc_arr[i] = test_acc
         i = i+1
@@ -123,17 +114,31 @@ def train_nn_with_different_seeds(features, targets):
     train_acc_std = np.std(test_acc_arr) # TODO
     test_acc_mean = np.average(test_acc_arr) # TODO
     test_acc_std = np.std(test_acc_arr) # TODO
+
+    # TODO: print min and max accuracy as well
     print(f'On the train set: {train_acc_mean:.4f} +/- {train_acc_std:.4f}')
     print(f'On the test set: {test_acc_mean:.4f} +/- {test_acc_std:.4f}')
-    # TODO: print min and max accuracy as well
 
+    # Task 1.5
+    # We plot loss curve for seed = 27. alpha = 1
+    print("----- Task 1.5 -----")
+    clf_new = MLPClassifier(random_state=27, max_iter=500, hidden_layer_sizes=200, alpha = 1).fit(X_train, y_train)
+    x_line = range(0, len(clf_new.loss_curve_))
+    y_line = clf_new.loss_curve_
+    plt.plot(x_line, y_line)
+    plt.ylabel("Loss")
+    plt.xlabel("Iterations")
+    plt.title("Loss over iteration. Seed = 27.")
+    plt.show()
 
-
+    # Task 1.6
+    print("----- Task 1.6 -----")
     # TODO: Confusion matrix and classification report (for one classifier that performs well)
     print("Predicting on the test set")
-    # y_pred = 0 # TODO calculate predictions
-    # print(classification_report(y_test, y_pred)) 
-    # print(confusion_matrix(y_test, y_pred, labels=range(10)))
+    y_pred = clf_new.predict(X_test) # TODO calculate predictions
+    print(classification_report(y_test, y_pred))
+
+    print(confusion_matrix(y_test, y_pred, labels=range(10)))
 
 
 def perform_grid_search(features, targets):
