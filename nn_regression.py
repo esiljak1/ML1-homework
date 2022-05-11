@@ -40,5 +40,11 @@ def solve_regression_task(features, targets):
     y_pred_test = clf.predict(X_test) # TODO
     print(f'Train MSE: {calculate_mse(y_train, y_pred_train):.4f}. Test MSE: {calculate_mse(y_test, y_pred_test):.4f}')
 
-    loss = clf.loss_
+    # Calculate loss
+    clf_new = clf.best_estimator_.fit(X_train, y_train)
+    loss = clf_new.loss_
     print("The loss achived with our model is", loss)
+
+    y_pred_train = clf_new.predict(X_train) # TODO
+    y_pred_test = clf_new.predict(X_test) # TODO
+    print(f'Train MSE: {calculate_mse(y_train, y_pred_train):.4f}. Test MSE: {calculate_mse(y_test, y_pred_test):.4f}')
