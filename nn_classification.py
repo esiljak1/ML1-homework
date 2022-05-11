@@ -99,6 +99,7 @@ def train_nn_with_different_seeds(features, targets):
     i = 0
 
     for seed in seeds:
+        np.random.seed(seed)
         clf = MLPClassifier(random_state=seed, max_iter=500, hidden_layer_sizes=200, alpha = 1).fit(X_train, y_train)
         train_acc = clf.score(X_train, y_train)  # TODO
         test_acc = clf.score(X_test, y_test)  # TODO for each seed

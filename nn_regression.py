@@ -22,15 +22,15 @@ def solve_regression_task(features, targets):
     """
     X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.2, random_state=33)
 
-    n_hidden_neurons_list = [10,100,200] # TODO (try at least 3 different numbers of neurons)
+    n_hidden_neurons_list = [200, 500, 700] # TODO (try at least 3 different numbers of neurons)
 
     # TODO: MLPRegressor, choose the model yourself
     # We are going to use function GridSearchCV
     parameters = {
-                    "hidden_layer_sizes" : n_hidden_neurons_list,               # number of neurons
-                    "early_stopping" : [True, False],                           # Regularization
-                    "learning_rate" : ["constant", "invscaling", "adaptive"],   # optimizer
-                    "max_iter" : [100, 200, 500]
+                    "hidden_layer_sizes" : n_hidden_neurons_list,       # number of neurons
+                    "alpha": [0.001, 1.0],                         # Regularization
+                    "solver": ["lbfgs", "adam"],                        # optimizer
+                    "max_iter" : [200, 500]
                      }
     clf = GridSearchCV( MLPRegressor(), parameters ).fit(X_train, y_train)
     print ("The best parameters are: ", clf.best_params_)
@@ -44,7 +44,3 @@ def solve_regression_task(features, targets):
     clf_new = clf.best_estimator_.fit(X_train, y_train)
     loss = clf_new.loss_
     print("The loss achived with our model is", loss)
-
-    y_pred_train = clf_new.predict(X_train) # TODO
-    y_pred_test = clf_new.predict(X_test) # TODO
-    print(f'Train MSE: {calculate_mse(y_train, y_pred_train):.4f}. Test MSE: {calculate_mse(y_test, y_pred_test):.4f}')
