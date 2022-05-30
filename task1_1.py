@@ -4,9 +4,9 @@ from sklearn.base import BaseEstimator
 
 class KNearestNeighborsClassifier(BaseEstimator):
     def __init__(self, k=1):
-      self.y = None
-      self.X = None
-      self.k = k
+        self.y = None
+        self.X = None
+        self.k = k
 
     def fit(self, X, y):
         # TODO IMPLEMENT ME
