@@ -1,3 +1,4 @@
+import os
 import pickle as pkl
 
 import numpy as np
@@ -6,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 def get_toy_dataset(dataset_idx, random_state=42, apply_noise=False, remove_outlier=False):
-  with open('data/dataset%d.pkl' % dataset_idx, 'rb') as f:
+  with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/dataset{dataset_idx}.pkl', 'rb') as f:
     X, y = pkl.load(f)
 
   if remove_outlier:
