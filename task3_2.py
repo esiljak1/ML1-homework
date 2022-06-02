@@ -1,27 +1,29 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.datasets import make_classification
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
 
-from datasets import get_heart_dataset, get_toy_dataset
-from sklearn.model_selection import train_test_split, StratifiedKFold
-from sklearn.feature_selection import RFECV
-import pickle as pkl
+from datasets import get_toy_dataset
 
 if __name__ == '__main__':
   X_train, X_test, y_train, y_test = get_toy_dataset(4)
 
-  #TODO fit a random forest classifier and check how well it performs on the test set after tuning the parameters,
+  #TODO fit a random forest classifier and """"check how well it performs on the test set after tuning the parameters""",
   # report your results
-  rf = ...
+  rf = RandomForestClassifier()
+  rf.fit(X_train, y_train)
 
-  #TODO fit a SVC and find suitable parameters, report your results
-  svc = ...
+  #TODO fit a SVC and """find suitable parameters"""", report your results
+  svc = SVC()
+  X = np.append(X_train, X_test)
+  y = np.append(y_train, y_test)
+  svc.fit(X,y)
 
   # TODO create a bar plot (https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.barh.html#matplotlib.pyplot.barh)
   # of the `feature_importances_` of the RF classifier.
+
+  plt.barh(rf.feature_importances_)
+  # FALTAN LOSDETALLES DEL PLOT!!!!
 
   # TODO create another RF classifier
   # Use recursive feature elimination (https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFECV.html#sklearn.feature_selection.RFECV)

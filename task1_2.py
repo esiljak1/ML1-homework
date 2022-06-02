@@ -1,5 +1,9 @@
+import os
+
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
+
+path = os.path.dirname(os.path.realpath(__file__))
 
 import plotting
 from datasets import get_toy_dataset
@@ -26,7 +30,7 @@ if __name__ == '__main__':
     plt.xlabel("X")
     plt.ylabel("y")
     plt.title("Datasets and decision boundary")
-    plt.savefig("figure1_task_1.2")
+    plt.savefig(f"{path}/dataset{idx}/figure1_task_1_2.png")
     plt.show()
 
     # Training and Test accuracies
@@ -37,6 +41,6 @@ if __name__ == '__main__':
     plt.xlabel("k")
     plt.ylabel("Accuracies")
     plt.title("Training and test accuracy")
-    plt.savefig("figure2_task_1.2")
+    plt.savefig(f"{path}/dataset{idx}/figure2_task_1_2.png")
     plt.show()
 
