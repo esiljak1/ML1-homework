@@ -12,6 +12,10 @@ if __name__ == '__main__':
   # report your results
   rf = RandomForestClassifier()
   rf.fit(X_train, y_train)
+  test_score = rf.score(X_test, y_test)
+  print(f"Test Score: {test_score}")
+  # print(f"Dataset {idx}: {clf.best_params_}")
+
 
   #TODO fit a SVC and """find suitable parameters"""", report your results
   svc = SVC()
@@ -23,6 +27,10 @@ if __name__ == '__main__':
   # of the `feature_importances_` of the RF classifier.
 
   plt.barh(rf.feature_importances_)
+  plt.xlabel("missing")
+  plt.ylabel("missing")
+  plt.title("missing")
+  plt.show()
   # FALTAN LOSDETALLES DEL PLOT!!!!
 
   # TODO create another RF classifier
