@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 from sklearn.model_selection import GridSearchCV
 
 import plotting
@@ -23,10 +22,21 @@ if __name__ == '__main__':
     plt.figure()
     plotting.plot_decision_boundary(X_train, clf)
     plotting.plot_dataset(X_train, X_test, y_train, y_test)
-    # TODO you should use the plt.savefig(...) function to store your plots before calling plt.show()
+    # TODO you8 should use the plt.savefig(...) function to store your plots before calling plt.show()
+    plt.xlabel("X")
+    plt.ylabel("y")
+    plt.title("Datasets and decision boundary")
+    plt.savefig("figure1_task_1.2")
     plt.show()
+
+    # Training and Test accuracies
     plt.figure()
-    plt.plot(clf.cv_results_['mean_train_score'])
-    plt.plot(clf.cv_results_['mean_test_score'])
+    plt.plot(range(1,100), clf.cv_results_['mean_train_score'], label = "Training accuracy") # He añadido el range para que empiece en k=1
+    plt.plot(range(1,100), clf.cv_results_['mean_test_score'], color = "r", label = "Test accuracy")
+    plt.legend() # Cuando consiga correr el programa revisar esto :)
+    plt.xlabel("k")
+    plt.ylabel("Accuracies")
+    plt.title("Training and test accuracy")
+    plt.savefig("figure2_task_1.2")
     plt.show()
 
