@@ -9,7 +9,7 @@ if __name__ == '__main__':
   for idx in [1, 2, 3]:
     X_train, X_test, y_train, y_test = get_toy_dataset(idx)
     # TODO start with `n_estimators = 1`
-    dict_parameters = dict( n_estimators = [1], max_depth= range(1,100))
+    dict_parameters = dict( n_estimators = [1], max_depth= range(1,101))
     rf = RandomForestClassifier()
     clf = GridSearchCV(rf, dict_parameters)
     clf.fit(X_train, y_train)
