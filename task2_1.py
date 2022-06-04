@@ -13,8 +13,8 @@ def loss(w, b, C, X, y):
 def grad(w, b, C, X, y):
     # TODO: implement the gradients with respect to w and b.
     # useful methods: np.sum, np.where, numpy broadcasting
-    grad_w = w + C * np.sum([np.where(y[i] * (np.dot(w.T, X[i]) + b) > 1, 0, -y[i] * X[i]) for i in range(y.shape[0])]) / y.shape[0]
-    grad_b = C * np.sum([np.where(y[i] * (np.dot(w.T, X[i]) + b) > 1, 0, -y[i]) for i in range(y.shape[0])]) / y.shape[0]
+    grad_w = w + C * np.sum([np.where(y[i] * (np.dot(w.T, X[i]) + b) > 1, 0, -y[i] * X[i]) for i in range(y.shape[0])])
+    grad_b = C * np.sum([np.where(y[i] * (np.dot(w.T, X[i]) + b) > 1, 0, -y[i]) for i in range(y.shape[0])])
     return grad_w, grad_b
 
 
