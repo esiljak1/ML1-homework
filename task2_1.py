@@ -32,14 +32,15 @@ class LinearSVM(BaseEstimator):
         self.w = np.zeros(X.shape[1])
         self.b = 0.
         loss_list = []
-        VALUE = 10
+        EPS = 0.01
         for j in range(self.max_iter):
             # TODO: compute the gradients, update the weights, compute the loss
             grad_w, grad_b = grad(self.w, self.b, self.C, X, y)
             self.w = self.w - self.eta * grad_w
             self.b = self.b - self.eta * grad_b
             loss_list.append(loss(self.w, self.b, self.C, X, y))
-            if loss_list[j] < VALUE:
+            if j > 5 and max(loss_list[-5:]) - min(loss_list[-5:]) < EPS:
+                print(f"j: {j}")
                 return loss_list
 
         return loss_list
