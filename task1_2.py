@@ -15,7 +15,7 @@ if __name__ == '__main__':
     knn = KNearestNeighborsClassifier()
     #TODO: use the `GridSearchCV` meta-classifier and search over different values of `k`!
     # include the `return_train_score=True` option to get the training accuracies
-    k_range = list(range(1, 100))
+    k_range = list(range(1, 101))
     grid_dict = dict(k = k_range)
     clf = GridSearchCV(knn, grid_dict, return_train_score=True)
     clf.fit(X_train, y_train)

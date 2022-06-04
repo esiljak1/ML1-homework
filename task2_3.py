@@ -21,7 +21,7 @@ if __name__ == '__main__':
         clf.fit(X_train, y_train)
         test_score = clf.score(X_test, y_test)
         print("Test Score:", test_score)
-        print("Mean cross-validated Test Score:", clf.best_score_)
+        print("Mean cross-validated score:", clf.best_score_)
         print(f"Dataset {idx}: {clf.best_params_}")
 
 
@@ -31,5 +31,5 @@ if __name__ == '__main__':
         plotting.plot_dataset(X_train, X_test, y_train, y_test)
         plt.xlabel("X")
         plt.ylabel("y")
-        plt.title(f"Dataset {idx} (train and test) and decision boundary")
+        plt.title(f"Dataset {idx} and decision boundary")
         plt.show()

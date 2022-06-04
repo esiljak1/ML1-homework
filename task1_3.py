@@ -1,12 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import cross_val_score
 
 import plotting
 from datasets import get_toy_dataset
 from task1_1 import KNearestNeighborsClassifier
-from sklearn.model_selection import cross_val_score
-
 
 if __name__ == '__main__':
     X_train, X_test, y_train, y_test = get_toy_dataset(2, apply_noise=True)
@@ -22,11 +21,15 @@ if __name__ == '__main__':
         print(f"Mean cross validation score for k={k}: {np.mean(cross_val)}\n")
         # TODO plot the decision boundaries!
         plotting.plot_decision_boundary(X_test, clf)
+        plotting.plot_dataset(X_train, X_test, y_train, y_test)
+        plt.xlabel("X")
+        plt.ylabel ("y")
+        plt.title(f"Data set 2 and decision boundary for k ={k}")
         plt.show()
 
     # TODO find the best parameters for the noisy dataset!
     knn = KNearestNeighborsClassifier()
-    k = range(1, 100)
+    k = range(1, 101)
     param_grid = dict(
       k=k
     )
