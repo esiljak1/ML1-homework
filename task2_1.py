@@ -48,7 +48,7 @@ class LinearSVM(BaseEstimator):
         # TODO: assign class labels to unseen data
         y_pred = [np.sign(np.dot(self.w.T, X[i]) + self.b) for i in range(X.shape[0])]
         # converting y_pred from {-1, 1} to {0, 1}
-        return [np.where(y_pred[i] == -1, 0, 1) for i in range(len(y_pred))]
+        return np.array([np.where(y_pred[i] == -1, 0, 1) for i in range(len(y_pred))])
 
     def score(self, X, y):
         # TODO: IMPLEMENT ME

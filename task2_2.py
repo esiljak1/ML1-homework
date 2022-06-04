@@ -8,6 +8,7 @@ import numpy as np
 
 if __name__ == '__main__':
     X_train, X_test, y_train, y_test = get_toy_dataset(1, remove_outlier=True)
+    print(X_train.shape)
     svm = LinearSVM()
     # TODO use grid search to find suitable parameters!
 
@@ -33,3 +34,7 @@ if __name__ == '__main__':
     print(f"Test Score: {test_score}")
 
     # TODO plot the decision boundary!
+    plt.figure()
+    plotting.plot_decision_boundary(X_train, svm)
+    plotting.plot_dataset(X_train, X_test, y_train, y_test)
+    plt.show()
