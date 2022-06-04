@@ -40,7 +40,6 @@ class LinearSVM(BaseEstimator):
             self.b = self.b - self.eta * grad_b
             loss_list.append(loss(self.w, self.b, self.C, X, y))
             if j > 5 and max(loss_list[-5:]) - min(loss_list[-5:]) < EPS:
-                print(f"j: {j}")
                 return loss_list
 
         return loss_list
