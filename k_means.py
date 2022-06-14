@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def euclidean_distance(x, y):
     """
     :param x: D-dimensional vector
@@ -8,6 +9,7 @@ def euclidean_distance(x, y):
     """
     dist = 0 # TODO: implement 
     return dist
+
 
 def cost_function(X, K, ind_samples_clusters, centroids):
     """
@@ -23,6 +25,7 @@ def cost_function(X, K, ind_samples_clusters, centroids):
     # TODO: implement
     return J
 
+
 def closest_centroid(sample, centroids):
     """
     :param sample: a data point x_n (of dimension D)
@@ -36,6 +39,7 @@ def closest_centroid(sample, centroids):
     idx_closest_cluster = 0 # TODO: change
 
     return idx_closest_cluster
+
 
 def assign_samples_to_clusters(X, K, centroids):
     """
@@ -55,6 +59,7 @@ def assign_samples_to_clusters(X, K, centroids):
     assert np.min(ind_samples_clusters) == 0 and np.max(ind_samples_clusters == 1), "These must be one-hot vectors"
     return ind_samples_clusters
 
+
 def recompute_centroids(X, K, ind_samples_clusters):
     """
     :param X: data for clustering, shape: (N, D), with N - number of data points, D - dimension
@@ -69,6 +74,7 @@ def recompute_centroids(X, K, ind_samples_clusters):
     # TODO: Implement the equation
 
     return centroids
+
 
 def kmeans(X, K, max_iter):
     """

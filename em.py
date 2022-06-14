@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import multivariate_normal
 
+
 def calculate_responsibilities(X, mean, sigma, pi, N, K):
     """
     :param X: data for clustering, shape: (N, D), with N being the number of data points, D the dimension
