@@ -72,10 +72,18 @@ def recompute_centroids(X, K, ind_samples_clusters):
     :return: centroids - means of clusters, shape: (K, D)
     """
     D = X.shape[1]
-    
+    N = X.shape[0]
+
     centroids = np.zeros((K, D))
     
     # TODO: Implement the equation
+    for k in range(K):
+        first_sum = 0
+        second_sum = 0
+        for n in range(N):
+            first_sum += ind_samples_clusters[n][k] * X[n]
+            second_sum += ind_samples_clusters[n][k]
+        centroids[k] = first_sum / second_sum
 
     return centroids
 
