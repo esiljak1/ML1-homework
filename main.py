@@ -41,7 +41,7 @@ def plot_original_data(x, y, data_labels):
 
 def plot_mickey_mouse(X, K, ind_samples_clusters, centroids):
     x, y = X[:, 0], X[:, 1]
-    clusters = np.argmax(ind_samples_clusters, axis=1) # will work both for K-means and EM
+    clusters = np.argmax(ind_samples_clusters, axis=1)  # will work both for K-means and EM
     
     fig = plt.figure()
     fig.suptitle('Mickey mouse')
@@ -63,8 +63,14 @@ def plot_mickey_mouse(X, K, ind_samples_clusters, centroids):
 
 
 def plot_cost(cost):
-    # TODO: plot cost over iteration
-    pass
+    X = range(len(cost))
+
+    fig = plt.figure()
+    fig.suptitle("Cost")
+    plt.plot(X, cost)
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.show()
 
 
 def task_kmeans(X):
