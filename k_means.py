@@ -110,13 +110,13 @@ def kmeans(X, K, max_iter):
     cost = []
     for it in range(max_iter):    
         # Assign samples to the clusters
-        ind_samples_clusters = None # TODO: function call to assign samples to clusters
-        J = 0 # TODO: function call to evaluate the cost
+        ind_samples_clusters = assign_samples_to_clusters(X, K, centroids)  # TODO: function call to assign samples to clusters
+        J = cost_function(X, K, ind_samples_clusters, centroids)  # TODO: function call to evaluate the cost
         cost.append(J)
         
         # Calculate new centroids from the clusters
-        centroids = None # TODO: function call to recompute the centroids
-        J = 0 # TODO: function call to evaluate cost again
+        centroids = recompute_centroids(X, K, ind_samples_clusters)  # TODO: function call to recompute the centroids
+        J = cost_function(X, K, ind_samples_clusters, centroids)  # TODO: function call to evaluate cost again
         cost.append(J)
         
         if it > 0 and np.abs(cost[-1] - cost[-2]) < eps:
