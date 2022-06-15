@@ -7,7 +7,7 @@ def euclidean_distance(x, y):
     :param y: D-dimensional vector
     :return: dist - scalar value
     """
-    dist = 0 # TODO: implement 
+    dist = np.linalg.norm(x - y)  # TODO: implement
     return dist
 
 
@@ -21,6 +21,9 @@ def cost_function(X, K, ind_samples_clusters, centroids):
     """
     J = 0
     N = X.shape[0]
+    for n in range(N):
+        for k in range(K):
+            J += ind_samples_clusters[n][k] * np.linalg.norm(X[n] - centroids[k]) ** 2
 
     # TODO: implement
     return J
@@ -35,8 +38,7 @@ def closest_centroid(sample, centroids):
     # Calculate distance of the current sample to each centroid
     # Return the index of the closest centroid (int value from 0 to (K-1))
     
-    distances = [0] # TODO: change
-    idx_closest_cluster = 0 # TODO: change
+    idx_closest_cluster = np.argmin([np.linalg.norm(sample - centroid) ** 2 for centroid in centroids])  # TODO: change
 
     return idx_closest_cluster
 
@@ -54,7 +56,9 @@ def assign_samples_to_clusters(X, K, centroids):
     ind_samples_clusters = np.zeros((N, K))
 
     # TODO: implement
-    # Here you will need to call the closest_centroid() function
+    for n in range(N):
+        closest_centroid_index = closest_centroid(X[n], centroids)
+        ind_samples_clusters[n][closest_centroid_index] = 1
 
     assert np.min(ind_samples_clusters) == 0 and np.max(ind_samples_clusters == 1), "These must be one-hot vectors"
     return ind_samples_clusters
