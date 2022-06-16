@@ -7,7 +7,7 @@ def euclidean_distance(x, y):
     :param y: D-dimensional vector
     :return: dist - scalar value
     """
-    dist = np.linalg.norm(x - y)  # TODO: implement
+    dist = np.linalg.norm(x - y)
     return dist
 
 
@@ -23,9 +23,8 @@ def cost_function(X, K, ind_samples_clusters, centroids):
     N = X.shape[0]
     for n in range(N):
         for k in range(K):
-            J += ind_samples_clusters[n][k] * np.linalg.norm(X[n] - centroids[k]) ** 2
+            J += ind_samples_clusters[n][k] * euclidean_distance(X[n], centroids[k]) ** 2
 
-    # TODO: implement
     return J
 
 
@@ -38,7 +37,7 @@ def closest_centroid(sample, centroids):
     # Calculate distance of the current sample to each centroid
     # Return the index of the closest centroid (int value from 0 to (K-1))
     
-    idx_closest_cluster = np.argmin([np.linalg.norm(sample - centroid) ** 2 for centroid in centroids])  # TODO: change
+    idx_closest_cluster = np.argmin([euclidean_distance(sample, centroid) ** 2 for centroid in centroids])
 
     return idx_closest_cluster
 
@@ -51,11 +50,10 @@ def assign_samples_to_clusters(X, K, centroids):
     :return: ind_samples_clusters: indicator variables for all data points, shape: (N, K)
     """
 
-    N = X.shape[0] # N - number of samples
+    N = X.shape[0]  # N - number of samples
 
     ind_samples_clusters = np.zeros((N, K))
 
-    # TODO: implement
     for n in range(N):
         closest_centroid_index = closest_centroid(X[n], centroids)
         ind_samples_clusters[n][closest_centroid_index] = 1
@@ -76,7 +74,6 @@ def recompute_centroids(X, K, ind_samples_clusters):
 
     centroids = np.zeros((K, D))
     
-    # TODO: Implement the equation
     for k in range(K):
         first_sum = 0
         second_sum = 0
@@ -110,13 +107,13 @@ def kmeans(X, K, max_iter):
     cost = []
     for it in range(max_iter):    
         # Assign samples to the clusters
-        ind_samples_clusters = assign_samples_to_clusters(X, K, centroids)  # TODO: function call to assign samples to clusters
-        J = cost_function(X, K, ind_samples_clusters, centroids)  # TODO: function call to evaluate the cost
+        ind_samples_clusters = assign_samples_to_clusters(X, K, centroids)
+        J = cost_function(X, K, ind_samples_clusters, centroids)
         cost.append(J)
         
         # Calculate new centroids from the clusters
-        centroids = recompute_centroids(X, K, ind_samples_clusters)  # TODO: function call to recompute the centroids
-        J = cost_function(X, K, ind_samples_clusters, centroids)  # TODO: function call to evaluate cost again
+        centroids = recompute_centroids(X, K, ind_samples_clusters)
+        J = cost_function(X, K, ind_samples_clusters, centroids)
         cost.append(J)
         
         if it > 0 and np.abs(cost[-1] - cost[-2]) < eps:
