@@ -69,8 +69,8 @@ def plot_cost(cost):
     fig = plt.figure()
     fig.suptitle("Cost")
     plt.plot(X, cost)
-    plt.xlabel("x")
-    plt.ylabel("y")
+    plt.xlabel("iteration")
+    plt.ylabel("cost")
     plt.show()
 
 
@@ -79,7 +79,7 @@ def task_kmeans(X):
     :param X: data for clustering, shape: (N, D), N=500, D = 2
     :return:
     """
-    K = 6 # TODO: change
+    K = 4 # TODO: change
     max_iter = 100  # TODO: change
     ind_samples_clusters, centroids, cost = kmeans(X, K, max_iter)
 
@@ -93,7 +93,7 @@ def task_em(X):
     :return:
     """
     K = 4 # TODO: change
-    max_iter = 1000 # TODO: change
+    max_iter = 100 # TODO: change
     means, soft_clusters, log_likelihood = em(X, K, max_iter)
     
     plot_cost(log_likelihood)
@@ -111,12 +111,12 @@ def main():
 
     # ----- Task K-Means
     print('--- Task K-Means ---')
-    # task_kmeans(X_mouse)  # TODO: uncomment to call the function
+    task_kmeans(X_mouse)  # TODO: uncomment to call the function
 
     
     # ----- Task EM
     print('--- Task EM ---')
-    task_em(X_mouse) # TODO: uncomment to call the function
+    # task_em(X_mouse) # TODO: uncomment to call the function
 
 
 if __name__ == '__main__':
