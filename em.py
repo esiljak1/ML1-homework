@@ -16,14 +16,14 @@ def calculate_responsibilities(X, mean, sigma, pi, N, K):
 
     likelihood = np.zeros((N, K))
     for k in range(K):
-        likelihood[:, k] = multivariate_normal.pdf(X, mean=mean[k,:], cov=cov[k])
+        likelihood[:, k] = multivariate_normal.pdf(X, mean=mean[k,:], cov=sigma[k])
     denom = np.sum((pi * likelihood), axis=1) # shape: (N,)
-    print(denom.shape)
+    # print(denom.shape)
 
     # TODO: Now calculate responsibilities gamma_nk, that is, the whole expression
     # Use the previously defined and calculated variable denom
     for k in range(K):
-        responsibilities[:, k] = pi[k] / denom * likelihood[:, k] # TODO: change
+        responsibilities[:, k] = (pi[k] * likelihood[:, k] )/ denom # TODO: change
 
     return responsibilities                                             
 
@@ -53,10 +53,12 @@ def update_parameters(X, mean, sigma, pi, responsibilities, N, K):
     # and no points will be achieved only for rewriting it.
     # The points for this task will be given for implementing the equations.
     for k in range(K):
+
         gamma_nk = responsibilities[:, k].T
 
         # TODO: mean_new
-        mean_new[k] = 1/N_k * np.dot(gamma_nk,X)
+
+        mean_new[k] = 1/N_k[k] * np.dot(gamma_nk,X)
         
         tmp = np.zeros_like(sigma_new[k])
         for sample in range(N):
@@ -66,7 +68,7 @@ def update_parameters(X, mean, sigma, pi, responsibilities, N, K):
         sigma_new[k] = tmp / N_k[k]
 
         # TODO: pi_new
-        pi_new[k] = N_k/N
+        pi_new[k] = N_k[k]/N
     
     return mean_new, sigma_new, pi_new
 
@@ -104,10 +106,12 @@ def em(X, K, max_iter):
     for it in range(max_iter):
         # E-Step
         # TODO: appropriate function call
-        
+        responsibilities = calculate_responsibilities(X, mean, sigma, pi, N, K)
+
         # M-Step
         # TODO: appropriate function call
-        
+        mean, sigma, pi = update_parameters(X, mean, sigma, pi, responsibilities, N, K)
+
         # Evaluate
         soft_clusters = np.zeros((N, K))
         for k in range(K):
