@@ -78,7 +78,7 @@ def task_kmeans(X):
     :param X: data for clustering, shape: (N, D), N=500, D = 2
     :return:
     """
-    K = 6 # TODO: change
+    K = 4  # TODO: change
     max_iter = 100  # TODO: change
     ind_samples_clusters, centroids, cost = kmeans(X, K, max_iter)
 
