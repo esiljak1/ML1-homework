@@ -113,8 +113,10 @@ def kmeans(X, K, max_iter):
         
         # Calculate new centroids from the clusters
         centroids = recompute_centroids(X, K, ind_samples_clusters)
+        """
         J = cost_function(X, K, ind_samples_clusters, centroids)
         cost.append(J)
+        """
         
         if it > 0 and np.abs(cost[-1] - cost[-2]) < eps:
             print(f'Iteration {it+1}. Algorithm converged.')
