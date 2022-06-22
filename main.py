@@ -1,7 +1,8 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from k_means import kmeans
+import numpy as np
+
 from em import em
+from k_means import kmeans
 
 
 def load_data(filename):
@@ -91,8 +92,8 @@ def task_em(X):
     :param X: data for clustering, shape: (N, D), N=500, D = 2
     :return:
     """
-    K = 1 # TODO: change 
-    max_iter = 1 # TODO: change 
+    K = 4 # TODO: change
+    max_iter = 1000 # TODO: change
     means, soft_clusters, log_likelihood = em(X, K, max_iter)
     
     plot_cost(log_likelihood)
@@ -110,12 +111,12 @@ def main():
 
     # ----- Task K-Means
     print('--- Task K-Means ---')
-    task_kmeans(X_mouse)  # TODO: uncomment to call the function
+    # task_kmeans(X_mouse)  # TODO: uncomment to call the function
 
     
     # ----- Task EM
     print('--- Task EM ---')
-    # task_em(X_mouse) # TODO: uncomment to call the function
+    task_em(X_mouse) # TODO: uncomment to call the function
 
 
 if __name__ == '__main__':
